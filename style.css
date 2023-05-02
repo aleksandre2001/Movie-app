@@ -86,7 +86,7 @@ body{
 }
 
 
-.search-box{
+#search-box{
     background-color: #fff;
     position: absolute;
     padding-left: 11px;
@@ -165,7 +165,7 @@ body{
 
 
 
-.movies-wrapper{
+#movies-wrapper{
     height: auto;
     margin: calc(63em / 16) 0px calc(63em / 16) 0px;
 
