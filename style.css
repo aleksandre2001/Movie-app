@@ -86,7 +86,7 @@ body{
 }
 
 
-#search-box{
+#search-form{
     background-color: #fff;
     position: absolute;
     padding-left: 11px;
@@ -111,7 +111,7 @@ body{
     justify-content: center;
 }
 
-.search-box input{
+#search-form input{
 
     
     font-style: normal;
@@ -135,7 +135,7 @@ body{
 }
 
 
-.search-box button{
+#search-form button{
     padding: 11px 11px 11px 17px;
     gap: 8px;
     

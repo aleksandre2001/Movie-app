@@ -4,3 +4,10 @@ export class Movie {
         
     }
 }
+
+
+// export class Movie{
+//     constructor(data){
+//         this.
+//     }
+// }

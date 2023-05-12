@@ -1,0 +1,12 @@
+{
+  "type": "module",
+  "name": "package.json",
+  "version": "1.0.0",
+  "description": "1. make  basic htmls \r 2. make a basic  css\r 3. look in to api working, what this returns\r 4 async functions, callbacks, render in html div, inner html, filter, map, array",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
