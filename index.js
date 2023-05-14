@@ -1,70 +1,84 @@
  
 import { Movie } from './data.js';
-let responseArr = []
-let movieArr = []
 
+///GLOBAL variables 
+const APIKEY = `1fb0a3cb`
+let movies = []
+let copyMovieArr = []
 
+//-----DOM--------
 const searchForm = document.getElementById('search-form')
 const inputField = document.getElementById('input')
+const searchedMovieList = document.getElementById('movies-wrapper')
+
+// Set up event listeners for form submission <AAAA> and document click <BBBB>
+searchForm.addEventListener("submit", handleClick)
+document.addEventListener("click", addClick)
 
 
-function handleClick (){
-    
-    fetch(`https://www.omdbapi.com/?s=${inputField.value}&apikey=1fb0a3cb`)
-    .then(res => res.json())
-    .then(data => {
-        responseArr = data.Search
-        if(data.Search){createMovieArr(responseArr)}
-        console.log(movieArr)
-        if(movieArr){render(movieArr)}
-
-        const movies = data.map(movieData => new Movie(movieData.title, movieData.year, movieData.genre));
-    })
-    .catch(error => console.error(error));
-
-    // function render(array){
-    //     array.forEach(movie => {
-    //         document.querySelector("#movies-wrapper").innerHTML += `
-    //             <div class="movie">
-    //                 <div class= "poster" style=" background-image: url("${movie.Poster})"; "></div>
-    //                 <div class = "content"> 
-    //                 <div class="title-data">
-    //                 <span class="title">${movie.Title} </span>  
-    //                 <span class="rating-data"> <img src="./images/star-icon.png"> 8.1</span>
-    //             </div>
-                
-    //             <div class="about1">
-    //                 <span> 117min</span>
-    //                 <span>Animation, Adventure</span>
-    //                 <span> 
-    //                 <a href="#">
-    //                     <button><img src="./images/plus-icon.png"/> Watchlist</button>
-    //                 </a>
-    //                 </span>
-    //             </div>
-    //             <div class="about2"><p>A blade runner must pursue and terminate four replicants who stole a ship in space, and have returned to Earth to find their creator.</p></div>
-    //             </div>
-    //         </div>            
-    //         `
-    //     })
-    // }
-
-    //     
-    // }
-    // }
-
+// <AAAA>
+function handleClick (e){
+    e.preventDefault()
+    fetchRequest()
+    inputField.value = ''
 }
 
- function createMovieArr(arr){
-      arr.forEach(movieData => {
-          let movie = new Movie(movieData)
-          // console.log(movieData)
-          movieArr.push(movie)
-      });
- }  
+function fetchRequest(data){
+    fetch(`https://www.omdbapi.com/?s=${inputField.value}&apikey=${APIKEY}`)
+        .then(res => res.json())
+        .then(data => {         
+            if(data.Response === "True"){
+                showEmptyMoviesList()
+                fetchDetailedMovieData(data)
+            }else showNoMoviesList()            
+        })
+}
 
-searchForm.addEventListener("submit", handleClick)
+function showEmptyMoviesList(){
+    document.querySelector("#movies-wrapper").innerHTML = " "
+}
+
+function fetchDetailedMovieData(data){
+    const length = data.Search.length < 10 ? data.Search.length : 10
     
+    for (let i=0; i<length; i++ ){
+        fetch(`https://www.omdbapi.com/?t=${data.Search[i].Title.trim().replaceAll(" ", "+")}&apikey=${APIKEY}`)
+        .then(res => res.json())
+        .then(data => {
+            renderMovie(data)
+        })
+    }
+}
+
+function renderMovie(data){
+    const newMovie = new Movie(data)
+    if(!movies.find(movie => movie.Title === newMovie.Title) && newMovie.Poster !== "N/A") {
+        movies.push(newMovie)
+        document.querySelector("#movies-wrapper").innerHTML += newMovie.getHtml()
+        if(localStorage.getItem(newMovie.getKey()) !== null) {
+            let addDiv = document.getElementById(`add-${newMovie.getKey()}`)
+            addDiv.innerHTML = "<p>Already saved!</p>"
+            addDiv.style.cursor = "default"
+        }
+    }
+}
+
+function showNoMoviesList(){
+    searchedMovieList.innerHTML = `<h1> oh sorry there is no something to show :( </h1>`
+}
 
 
+//  <BBBB>
+//clicking on add watchlist Btn and function to add object in local storage
+function addClick(event) {
+     if(event.target.dataset.id) {
+        addToWatchList(event.target.dataset.id)
+    }
+}
+function addToWatchList(id) {
+    localStorage.setItem(id, JSON.stringify(movies.find(movie => movie.imdbID === id)))
+    let addDiv = document.getElementById(`add-${id}`)
+    addDiv.innerText = "Added!"
+    addDiv.style.cursor = "default"
+}
 

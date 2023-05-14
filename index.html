@@ -1,15 +1,19 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+ 
   <title>Document</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="./images/plus-icon.png">
+  <link rel="stylesheet" type="text/css" href="style.css">
 
-  <!-- Font importing -->
-  <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"> -->
+  <!-- Icons library -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
 </head>
 
 
@@ -22,76 +26,27 @@
         <a href="watchlist.html">My Watchlist</a>
       </div>
 
-      
       <form id="search-form">
-        <img src="./images/Icon.png" />
+        <img type="image/png" src="./images/Icon.png" />
         <input type="text" id="input" placeholder="Search for a movie">
         <button type="submit" id="submit">Search</button>
       </form>
-      
     </div>
   </header>
-  
+
   <main>
     <section id="movies-wrapper">
-      
-      <div class="movie">
-        <div class= "poster"></div>
-        <div class = "content"> 
-          <div class="title-data">
-            <span class="title">Blade Runner </span>  
-            <span class="rating-data"> <img src="./images/star-icon.png"> 8.1</span>
-          </div>
-          
-          <div class="about1">
-            <span> 117min</span>
-            <span>Animation, Adventure</span>
-            <span> 
-              <a href="#">
-                <button><img src="./images/plus-icon.png"/> Watchlist</button>
-              </a>
-            </span>
-
-          </div>
-          <div class="about2"><p>A blade runner must pursue and terminate four replicants who stole a ship in space, and have returned to Earth to find their creator.</p></div>
-        </div>
+      <div class="start-exploring">
+        <i class="fas fa-film" id="film-icon"></i> 
+        <h2> Start exploring</h2>
       </div>
-
-
-      <div class="movie">
-        <div class= "poster"></div>
-        <div class = "content"> 
-          <div class="title-data">
-            <span class="title">Blade Runner </span>  
-            <span class="rating-data"> <img src="./images/star-icon.png"> 8.1</span>
-          </div>
-          
-          <div class="about1">
-            <span> 117min</span>
-            <span>Animation, Adventure</span>
-            <span> 
-              <a href="#">
-                <button ><img src="./images/plus-icon.png"/>   Watchlist</button>
-              </a>
-            </span>
-
-          </div>
-          <div class="about2"><p>A blade runner must pursue and terminate four replicants who stole a ship in space, and have returned to Earth to find their creator.</p></div>
-        </div>
-      </div>
-
       
-
+     
     </section>
-
-  
-
-
-  
-
+    
   </main>
   
-    <script src="index.js" type="module"></script>
+    <script src="./index.js" type="module"></script>
 </body>
 
 </html>
